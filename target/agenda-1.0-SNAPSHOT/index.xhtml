@@ -23,7 +23,27 @@ and open the template in the editor.
                 <p:outputLabel for="telefone" value="Telefone"/>
                 <p:inputMask mask="(99)9999-9999" id="telefone" value="#{clienteController.cliente.telefone}" />
             </p:panelGrid>
-            <p:commandButton value="Cadastrar" action="#{clienteController.inserir()}" />
+            <p:commandButton value="Cadastrar" action="#{clienteController.inserir()}" update="listaContatos" />
+        </h:form>
+        <h:form>
+            <h1>Excluir Contato</h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="deletar" value="ID-Do Contato!" />
+                <p:inputText id="deletar" value="#{clienteController.cliente.id}" />    
+            </p:panelGrid>
+            <p:commandButton value="Excluir" action="#{clienteController.deletar()}" />
+        </h:form>
+        <h:form class="lista" id="listaContatos">
+            <h1>Lista de Contatos</h1>
+            <p:dataTable id="c" var="item" value="#{clienteController.selecionaTodos()}"   
+                scrollable="true" scrollHeight="150" selection="#{clienteController.selecionaTodos()}">  
+                <p:column headerText="nome" width="100">  
+                    <h:outputText value="#{item.nome}" />
+                </p:column>   
+                <p:column headerText="telefone" width="100">  
+                    <h:outputText value="#{item.telefone}" />
+                </p:column>  
+            </p:dataTable> 
         </h:form>
     </h:body>
 </html>
