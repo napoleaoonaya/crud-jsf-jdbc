@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Agenda Telefônica</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css"></link>
+    </h:head>
+    <h:body>
+        <h1>Sistema de Agenda Telefônica :)</h1>
+        <h:form>
+            <h1>Inserção do Cliente</h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="nome" value="Nome" />
+                <p:inputText id="nome" value="#{clienteController.cliente.nome}" />
+                <p:outputLabel for="telefone" value="Telefone"/>
+                <p:inputMask mask="(99)9999-9999" id="telefone" value="#{clienteController.cliente.telefone}" />
+            </p:panelGrid>
+            <p:commandButton value="Cadastrar" action="#{clienteController.inserir()}" update="listaContatos" />
+        </h:form>
+        <h:form>
+            <h1>Excluir Contato</h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="deletar" value="ID-Do Contato!" />
+                <p:inputText id="deletar" value="#{clienteController.cliente.id}" />    
+            </p:panelGrid>
+            <p:commandButton value="Excluir" action="#{clienteController.deletar()}" update="listaContatos" />
+        </h:form>
+        <h:form class="lista" id="listaContatos">
+            <h1>Lista de Contatos</h1>
+            <p:dataTable id="c" var="item" value="#{clienteController.selecionaTodos()}"   
+                         scrollable="true" scrollHeight="150" selection="#{clienteController.selecionaTodos()}">  
+                <p:column headerText="nome" width="100">  
+                    <h:outputText value="#{item.nome}" />
+                </p:column>   
+                <p:column headerText="telefone" width="100">  
+                    <h:outputText value="#{item.telefone}" />
+                </p:column>  
+            </p:dataTable> 
+        </h:form>
+        <h:form class="atualizaContato">
+            <h1>Atualizar Contato</h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="atualizar" value="Atualizar Contato!" />
+                <p:inputText id="atualizar" value="#{clienteController.cliente.id}" />
+                <p:outputLabel for="nome" value="Nome" />
+                <p:inputText id="nome" value="#{clienteController.cliente.nome}" />
+                <p:outputLabel for="telefone" value="Telefone"/>
+                <p:inputMask mask="(99)9999-9999" id="telefone" value="#{clienteController.cliente.telefone}" />
+            </p:panelGrid>
+            <p:commandButton value="Atualizar" action="#{clienteController.atualizar()}" update="listaContatos" />
+        </h:form>
+    </h:body>
+</html>
